@@ -1,0 +1,16 @@
+# Amazon Ads Center - 运营端依赖
+# Python 3.11+
+
+# GUI
+PySide6>=6.5.0
+
+# 数据处理
+pandas>=2.0.0
+numpy>=1.24.0
+openpyxl>=3.1.0
+
+# HTTP
+requests>=2.28.0
+
+# 打包 (开发用)
+pyinstaller>=6.0.0
