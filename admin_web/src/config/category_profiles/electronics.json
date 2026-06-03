@@ -1,0 +1,17 @@
+{
+  "category_id": "electronics",
+  "category_name": "消费电子/配件",
+  "target_acos": 0.22,
+  "target_tacos": 0.10,
+  "budget_cap_ratio": 0.12,
+  "core_intent_roots": ["charger","adapter","power","cord","cable","usb c","laptop","replacement","compatible"],
+  "attribute_intent_roots": ["45w","65w","90w","100w","3ft","6ft","10ft","18awg","16awg","14awg","125v","250v","10a","15a","19v","20v","ul","etl","ce","rohs","nema","iec","c13","c14","c5","c7","3-prong","2-prong"],
+  "scenario_intent_roots": ["office","home","desk","travel","school","work","monitor","tv","printer","pc"],
+  "pain_value_roots": ["heavy duty","durable","safe","thick","strong","no loose","fast charging","reliable","universal"],
+  "brand_competitor_roots": ["hp","dell","lenovo","asus","acer","toshiba","samsung","lg","sony","anker","belkin","insignia","onn","microsoft","surface"],
+  "b2b_roots": ["bulk","pack","case","wholesale","business","office","commercial","multi pack","bundle"],
+  "negative_irrelevant_roots": ["iphone","ipad","macbook","watch","airpods"],
+  "high_relevance_roots": ["charger","adapter","power","cord","cable","laptop","replacement","compatible","nema","iec","c13","c14","c5","c7","hp","dell","lenovo","asus","acer","toshiba","samsung","monitor","tv"],
+  "asin_regex": "B0[A-Z0-9]{8}",
+  "naming_template": "{asin}-{ad_type}-{structure}-{intent}-{version}"
+}
