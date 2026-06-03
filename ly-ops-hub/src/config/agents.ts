@@ -1,0 +1,517 @@
+// ============================================================
+// LY-OPS Hub — Agent Registry
+// 新增 Agent 只需在此文件中追加对象即可。
+// 后续阶段将从此文件驱动所有 Agent 卡片、分类统计和筛选。
+// ============================================================
+
+import type { AgentTool } from "../types/agent";
+
+const STOCK_HELPER_URL =
+  import.meta.env.VITE_STOCK_HELPER_URL ?? "https://amazon-stock-helper.pages.dev";
+const STOCK_HELPER_GITHUB =
+  import.meta.env.VITE_STOCK_HELPER_GITHUB ??
+  "https://github.com/gzyangle2018-maker/amazon-inventory-assistant-20260528-v3-success";
+
+export const agents: AgentTool[] = [
+  // ── 数据分析 ──────────────────────────────────────────────
+  {
+    id: "daily-keyword-tracker",
+    name: "每天关键词追踪专家 MCP",
+    category: "data_analysis",
+    version: "v1",
+    description: "关键词排名 + 市场趋势追踪",
+    status: "planned",
+    entryType: "placeholder",
+    tags: ["关键词", "排名", "趋势"],
+    llmRequired: true,
+    priority: 10,
+  },
+  {
+    id: "sales-summary",
+    name: "销售数据汇总专家",
+    category: "data_analysis",
+    version: "v1",
+    description: "每天/周/月销量变化和问题点推送",
+    status: "planned",
+    entryType: "placeholder",
+    tags: ["销量", "报表", "推送"],
+    llmRequired: true,
+    priority: 11,
+  },
+  {
+    id: "monthly-profit",
+    name: "每月利润数据分析",
+    category: "data_analysis",
+    version: "v1",
+    description: "产品分级，推动备货和二次激活",
+    status: "planned",
+    entryType: "placeholder",
+    tags: ["利润", "分级", "备货"],
+    llmRequired: true,
+    priority: 12,
+  },
+  {
+    id: "weekly-inventory-master",
+    name: "每周库存大师",
+    category: "data_analysis",
+    version: "v1",
+    description: "销量 + 利润数据接通 + 滞销推送",
+    status: "developing",
+    entryType: "placeholder",
+    tags: ["库存", "滞销", "利润"],
+    llmRequired: true,
+    priority: 13,
+  },
+  {
+    id: "weekly-ad-report",
+    name: "每周广告报表",
+    category: "data_analysis",
+    version: "v1",
+    description: "三方插件 + ABA + 后台数据整合",
+    status: "planned",
+    entryType: "placeholder",
+    tags: ["广告", "报表", "ABA"],
+    llmRequired: true,
+    priority: 14,
+  },
+  {
+    id: "weekly-aba-trend",
+    name: "每周 ABA 趋势分析",
+    category: "data_analysis",
+    version: "v1",
+    description: "新增长尾词趋势分析",
+    status: "planned",
+    entryType: "placeholder",
+    tags: ["ABA", "长尾词", "趋势"],
+    llmRequired: true,
+    priority: 15,
+  },
+  {
+    id: "monthly-return-master",
+    name: "每月退货大师",
+    category: "data_analysis",
+    version: "v1",
+    description: "退货、卖家之声、差评解决",
+    status: "planned",
+    entryType: "placeholder",
+    tags: ["退货", "卖家之声", "差评"],
+    llmRequired: true,
+    priority: 16,
+  },
+
+  // ── 运营计划 ──────────────────────────────────────────────
+  {
+    id: "promotion-plan-master",
+    name: "推广计划大师",
+    category: "operation_plan",
+    version: "v1",
+    description: "新老品推广、竞品分析、推广计划",
+    status: "planned",
+    entryType: "placeholder",
+    tags: ["推广", "竞品", "新品"],
+    llmRequired: true,
+    priority: 20,
+  },
+  {
+    id: "old-product-revive",
+    name: "老品二次激活 v1",
+    category: "operation_plan",
+    version: "v1",
+    description: "根据销量利润判断老品重搭流量结构",
+    status: "planned",
+    entryType: "placeholder",
+    tags: ["老品", "激活", "流量"],
+    llmRequired: true,
+    priority: 21,
+  },
+
+  // ── 市场数据 ──────────────────────────────────────────────
+  {
+    id: "market-analysis-master",
+    name: "市场分析大师",
+    category: "market",
+    version: "v1",
+    description: "市场规模、竞品、趋势综合分析",
+    status: "planned",
+    entryType: "placeholder",
+    tags: ["市场", "竞品", "趋势"],
+    llmRequired: true,
+    priority: 30,
+  },
+  {
+    id: "supplier-deep-dive",
+    name: "供应商深挖大师",
+    category: "market",
+    version: "v1",
+    description: "供应链深挖与供应商评估",
+    status: "planned",
+    entryType: "placeholder",
+    tags: ["供应链", "供应商"],
+    llmRequired: true,
+    priority: 31,
+  },
+  {
+    id: "selling-point-expert",
+    name: "卖点解析专家",
+    category: "market",
+    version: "v1",
+    description: "产品卖点提取与差异化分析",
+    status: "planned",
+    entryType: "placeholder",
+    tags: ["卖点", "差异化"],
+    llmRequired: true,
+    priority: 32,
+  },
+  {
+    id: "collab-costdown",
+    name: "合作开模与 Costdown 深度优化",
+    category: "market",
+    version: "v1",
+    description: "合作开模与成本优化方案",
+    status: "planned",
+    entryType: "placeholder",
+    tags: ["开模", "降本", "合作"],
+    llmRequired: true,
+    priority: 33,
+  },
+
+  // ── 转化 ──────────────────────────────────────────────────
+  {
+    id: "listing-optimize-v1",
+    name: "Listing 优化 v1",
+    category: "conversion",
+    version: "v1",
+    description: "Listing 内容与转化优化",
+    status: "planned",
+    entryType: "placeholder",
+    tags: ["Listing", "转化", "SEO"],
+    llmRequired: true,
+    priority: 40,
+  },
+  {
+    id: "3c-listing-master-v2",
+    name: "3C Listing 大师 v2",
+    category: "conversion",
+    version: "v2",
+    description: "信息收集、QA Rufus 收集、Listing 写手、核查",
+    status: "planned",
+    entryType: "placeholder",
+    tags: ["3C", "Listing", "Rufus"],
+    llmRequired: true,
+    priority: 41,
+  },
+  {
+    id: "3c-listing-master-v2.1",
+    name: "3C Listing 大师 v2.1 Alexa",
+    category: "conversion",
+    version: "v2.1",
+    description: "信息收集、QA Rufus 收集、Listing 写手、核查（Alexa 增强）",
+    status: "planned",
+    entryType: "placeholder",
+    tags: ["3C", "Listing", "Alexa"],
+    llmRequired: true,
+    priority: 42,
+  },
+  {
+    id: "qa-master",
+    name: "QA 大师",
+    category: "conversion",
+    version: "v1",
+    description: "批量出 QA，提升页面互动",
+    status: "planned",
+    entryType: "placeholder",
+    tags: ["QA", "批量"],
+    llmRequired: true,
+    priority: 43,
+  },
+  {
+    id: "ai-image-gen-v2",
+    name: "AI 生图 v2",
+    category: "conversion",
+    version: "v2",
+    description: "信息收集、卖点提炼、图片提示词专家",
+    status: "planned",
+    entryType: "placeholder",
+    tags: ["AI 生图", "提示词", "卖点"],
+    llmRequired: true,
+    priority: 44,
+  },
+  {
+    id: "watermark-remover",
+    name: "去水印工具",
+    category: "conversion",
+    version: "v1",
+    description: "图片去水印处理工具",
+    status: "planned",
+    entryType: "placeholder",
+    tags: ["去水印", "图片"],
+    llmRequired: false,
+    priority: 45,
+  },
+  {
+    id: "ai-video-v1",
+    name: "AI 视频 v1",
+    category: "conversion",
+    version: "v1",
+    description: "卖点分析、视频脚本、分镜、三视图生成",
+    status: "planned",
+    entryType: "placeholder",
+    tags: ["视频", "脚本", "分镜"],
+    llmRequired: true,
+    priority: 46,
+  },
+  {
+    id: "ai-video-v2",
+    name: "AI 视频 v2",
+    category: "conversion",
+    version: "v2",
+    description: "卖点策略、产品一致性锁定、脚本、分镜、关键帧、动效、质检",
+    status: "planned",
+    entryType: "placeholder",
+    tags: ["视频", "关键帧", "动效", "质检"],
+    llmRequired: true,
+    priority: 47,
+  },
+  {
+    id: "viral-video-fusion-v3",
+    name: "爆款视频融合 v3",
+    category: "conversion",
+    version: "v3",
+    description: "优秀作品学习融合、脚本、分镜、关键帧、动效、质检",
+    status: "planned",
+    entryType: "placeholder",
+    tags: ["爆款", "融合", "视频"],
+    llmRequired: true,
+    priority: 48,
+  },
+  {
+    id: "negative-review-v1",
+    name: "差评处理 v1",
+    category: "conversion",
+    version: "v1",
+    description: "差评收集分类、规则匹配、执行记录、复盘",
+    status: "planned",
+    entryType: "placeholder",
+    tags: ["差评", "复盘", "规则"],
+    llmRequired: true,
+    priority: 49,
+  },
+
+  // ── 流量 ──────────────────────────────────────────────────
+  {
+    id: "ad-master-v1",
+    name: "广告分析大师 v1",
+    category: "traffic",
+    version: "v1",
+    description: "Opal 广告分析大师",
+    status: "planned",
+    entryType: "placeholder",
+    tags: ["广告", "Opal"],
+    llmRequired: true,
+    priority: 50,
+  },
+  {
+    id: "ad-master-v1.1",
+    name: "广告分析大师 v1.1",
+    category: "traffic",
+    version: "v1.1",
+    description: "Opal 广告分析大师（增强版）",
+    status: "planned",
+    entryType: "placeholder",
+    tags: ["广告", "Opal"],
+    llmRequired: true,
+    priority: 51,
+  },
+  {
+    id: "ad-master-v1.2",
+    name: "广告分析大师 v1.2",
+    category: "traffic",
+    version: "v1.2",
+    description: "广告分析大师 4.9",
+    status: "planned",
+    entryType: "placeholder",
+    tags: ["广告", "4.9"],
+    llmRequired: true,
+    priority: 52,
+  },
+  {
+    id: "ad-master-v2",
+    name: "广告分析大师 v2",
+    category: "traffic",
+    version: "v2",
+    description:
+      "数据校验、关键词库、广告结构、预算、12维优化、今日执行清单、7天监控",
+    status: "developing",
+    entryType: "placeholder",
+    tags: ["广告", "优化", "监控"],
+    llmRequired: true,
+    priority: 53,
+  },
+  {
+    id: "ad-master-v3",
+    name: "广告分析大师 v3",
+    category: "traffic",
+    version: "v3",
+    description: "广告分析、Bulk 执行、上传前风控审计",
+    status: "developing",
+    entryType: "placeholder",
+    tags: ["广告", "Bulk", "风控"],
+    llmRequired: true,
+    priority: 54,
+  },
+  {
+    id: "creator-master",
+    name: "Creator 大师",
+    category: "traffic",
+    version: "v1",
+    description: "站外投放与 Creator 合作管理",
+    status: "planned",
+    entryType: "placeholder",
+    tags: ["站外", "Creator", "投放"],
+    llmRequired: true,
+    priority: 55,
+  },
+  {
+    id: "offsite-outreach",
+    name: "站外建联专家",
+    category: "traffic",
+    version: "v1",
+    description: "站外资源建联与合作拓展",
+    status: "planned",
+    entryType: "placeholder",
+    tags: ["站外", "建联", "合作"],
+    llmRequired: true,
+    priority: 56,
+  },
+  {
+    id: "algorithm-feeding",
+    name: "算法投喂专家",
+    category: "traffic",
+    version: "v1",
+    description: "关联流量与算法投喂策略",
+    status: "planned",
+    entryType: "placeholder",
+    tags: ["算法", "关联流量"],
+    llmRequired: true,
+    priority: 57,
+  },
+
+  // ── 后端支持 ──────────────────────────────────────────────
+  {
+    id: "3c-appeal-v1",
+    name: "3C 申诉专家 v1",
+    category: "backend_support",
+    version: "v1",
+    description: "3C 品类申诉方案与文档生成",
+    status: "planned",
+    entryType: "placeholder",
+    tags: ["申诉", "3C"],
+    llmRequired: true,
+    priority: 60,
+  },
+  {
+    id: "stock-helper",
+    name: "库存备货助手",
+    category: "backend_support",
+    subCategory: "库存",
+    version: "v3",
+    description:
+      "用于亚马逊库存、备货、销量和补货建议分析。第一个已上线 Agent。",
+    details:
+      "已部署至 Cloudflare Pages，支持库存分析、销量趋势、补货建议等核心功能。",
+    steps: [
+      "输入 ASIN / SKU",
+      "选择分析时间范围",
+      "获取库存状态报告",
+      "查看补货建议",
+    ],
+    status: "online",
+    entryType: "external_url",
+    embedMode: "iframe",
+    url: STOCK_HELPER_URL,
+    githubUrl: STOCK_HELPER_GITHUB,
+    tags: ["库存", "备货", "销量", "已上线"],
+    ownerRole: "admin",
+    llmRequired: false,
+    hideTechnicalInfoForNonAdmin: true,
+    showUrlToRoles: ["admin"],
+    priority: 99,
+    features: [
+      { id: "upload", name: "上传库存表", enabledByDefault: true },
+      { id: "calculate", name: "自动计算", enabledByDefault: true },
+      { id: "export", name: "导出表格", enabledByDefault: true },
+      { id: "history", name: "历史记录", enabledByDefault: true },
+      { id: "admin_review", name: "管理员审核", enabledByDefault: false },
+    ],
+  },
+  {
+    id: "org-performance-v1",
+    name: "组织绩效与人才激励专家 v1",
+    category: "backend_support",
+    version: "v1",
+    description: "组织绩效评估与人才激励方案",
+    status: "planned",
+    entryType: "placeholder",
+    tags: ["绩效", "人才", "激励"],
+    llmRequired: true,
+    priority: 61,
+  },
+  {
+    id: "counterattack-master",
+    name: "反击大师",
+    category: "backend_support",
+    version: "v1",
+    description: "竞品反击策略与执行方案",
+    status: "planned",
+    entryType: "placeholder",
+    tags: ["反击", "竞品"],
+    llmRequired: true,
+    priority: 62,
+  },
+  {
+    id: "risk-warning",
+    name: "风险预警",
+    category: "backend_support",
+    version: "v1",
+    description: "侵权、认证、合规风险预警",
+    status: "planned",
+    entryType: "placeholder",
+    tags: ["风险", "侵权", "合规"],
+    llmRequired: true,
+    priority: 63,
+  },
+];
+
+// ── Derived helpers ──────────────────────────────────────────
+
+export function getAgentsByCategory(category: string): AgentTool[] {
+  return agents.filter((a) => a.category === category);
+}
+
+export function getAgentsByStatus(status: string): AgentTool[] {
+  return agents.filter((a) => a.status === status);
+}
+
+export function getAgentById(id: string): AgentTool | undefined {
+  return agents.find((a) => a.id === id);
+}
+
+export function getOnlineAgentCount(): number {
+  return agents.filter((a) => a.status === "online").length;
+}
+
+export function getDevelopingAgentCount(): number {
+  return agents.filter((a) => a.status === "developing").length;
+}
+
+export function getPlannedAgentCount(): number {
+  return agents.filter((a) => a.status === "planned").length;
+}
+
+export function getCategoryCounts(): Record<string, number> {
+  const counts: Record<string, number> = {};
+  for (const a of agents) {
+    counts[a.category] = (counts[a.category] ?? 0) + 1;
+  }
+  return counts;
+}
