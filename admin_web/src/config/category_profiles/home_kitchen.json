@@ -1,0 +1,17 @@
+{
+  "category_id": "home_kitchen",
+  "category_name": "家居厨房",
+  "target_acos": 0.30,
+  "target_tacos": 0.15,
+  "budget_cap_ratio": 0.08,
+  "core_intent_roots": ["organizer","storage","shelf","rack","holder","basket","container","jar","bottle","mat"],
+  "attribute_intent_roots": ["stainless steel","plastic","wood","bamboo","glass","silicone","large","small","set","foldable"],
+  "scenario_intent_roots": ["kitchen","bathroom","closet","garage","pantry","laundry","office desk","counter"],
+  "pain_value_roots": ["space saving","sturdy","easy install","no drill","waterproof","rust proof","easy clean","stackable"],
+  "brand_competitor_roots": ["simple houseware","mdesign","sterilite","rubbermaid","oxo","interdesign","yamazaki"],
+  "b2b_roots": ["bulk","pack","set","commercial","restaurant","hotel","wholesale"],
+  "negative_irrelevant_roots": [],
+  "high_relevance_roots": ["organizer","storage","shelf","rack","holder","basket","container"],
+  "asin_regex": "B0[A-Z0-9]{8}",
+  "naming_template": "{asin}-{ad_type}-{structure}-{intent}-{version}"
+}
