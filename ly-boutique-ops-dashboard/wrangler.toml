@@ -1,0 +1,26 @@
+# wrangler.toml — Cloudflare 全栈配置
+# 部署命令: npx wrangler pages deploy dist --project-name=ly-boutique-ops-dashboard-20260602-v1234
+
+name = "ly-boutique-ops-dashboard-20260602-v1234"
+compatibility_date = "2025-06-02"
+main = "workers/api.js"
+
+# D1 数据库绑定
+[[d1_databases]]
+binding = "DB"
+database_name = "ly-boutique-ops-dashboard-20260602-v1234-db"
+database_id = "75faa703-da9a-447a-bd69-2fc8fcf46760"
+
+# R2 存储桶绑定
+# [[r2_buckets]]
+# binding = "FILES"
+# bucket_name = "ly-boutique-ops-dashboard-20260602-v1234-files"
+
+# 环境变量（生产环境通过 Cloudflare Dashboard 设置）
+# [vars]
+# DATATER_API_KEY = ""  # 在 CF Dashboard 设置
+
+# Pages 配置
+[pages]
+build_command = "npm install && npm run build"
+output_dir = "dist"
