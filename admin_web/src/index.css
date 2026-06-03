@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-accent: 249 115 22;
+    --radius-card: 20px;
+    --radius-button: 9999px;
+    --radius-input: 14px;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', 'Microsoft YaHei', sans-serif;
+    background: #080B14;
+    color: #e8ecf4;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -0.01em;
+  }
+
+  ::-webkit-scrollbar { width: 3px; height: 3px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.06); border-radius: 9999px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.12); }
+}
+
+@layer components {
+  .card-premium {
+    @apply rounded-[20px] border p-5;
+    background: rgba(255,255,255,0.02);
+    border-color: rgba(255,255,255,0.05);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .btn-accent {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-white transition-all duration-500;
+    background: linear-gradient(135deg, rgba(249,115,22,0.8), rgba(249,115,22,0.5));
+    box-shadow: 0 2px 12px rgba(249,115,22,0.25);
+    transition-timing-function: cubic-bezier(0.32, 0.72, 0, 1);
+  }
+  .btn-accent:hover { filter: brightness(1.15); transform: translateY(-1px); box-shadow: 0 4px 20px rgba(249,115,22,0.4); }
+  .btn-accent:active { transform: translateY(0.5px) scale(0.985); }
+  .btn-accent:disabled { opacity: 0.3; pointer-events: none; box-shadow: none; }
+
+  .input-premium {
+    @apply w-full rounded-2xl border px-4 py-3 text-sm transition-all duration-500;
+    background: rgba(255,255,255,0.03);
+    border-color: rgba(255,255,255,0.07);
+    color: #e8ecf4;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+    transition-timing-function: cubic-bezier(0.32, 0.72, 0, 1);
+  }
+  .input-premium:focus {
+    @apply outline-none;
+    border-color: rgba(249,115,22,0.4);
+    box-shadow: 0 0 0 3px rgba(249,115,22,0.08), inset 0 1px 0 rgba(255,255,255,0.05);
+    background: rgba(255,255,255,0.05);
+  }
+  .input-premium::placeholder { color: rgba(255,255,255,0.15); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in { animation: fadeIn 0.5s cubic-bezier(0.32, 0.72, 0, 1); }
