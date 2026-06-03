@@ -1,0 +1,17 @@
+name = "amazon-stock-helper-v2"
+pages_build_output_dir = "public"
+compatibility_date = "2026-06-01"
+
+# D1 数据库绑定
+[[d1_databases]]
+binding = "DB"
+database_name = "amazon-inventory-db-v2"
+database_id = "7b7680a5-ea50-4ede-a410-89a3cde8778b"
+
+# 环境变量
+[vars]
+APP_VERSION = "1.0.1"
+
+# 密钥（部署后通过 wrangler secret 设置）
+# [[secrets]]
+# ADMIN_PASSWORD_HASH = "..."
