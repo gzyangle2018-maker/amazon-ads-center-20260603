@@ -1,0 +1,8 @@
+name = "amazon-ads-center-api"
+main = "src/index.ts"
+compatibility_date = "2024-12-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "amazon-ai-center-db"
+database_id = "6e14d333-8091-4197-89ec-41a529a44f7e"
