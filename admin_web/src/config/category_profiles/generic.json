@@ -1,0 +1,17 @@
+{
+  "category_id": "generic",
+  "category_name": "通用类目",
+  "target_acos": 0.25,
+  "target_tacos": 0.12,
+  "budget_cap_ratio": 0.10,
+  "core_intent_roots": [],
+  "attribute_intent_roots": [],
+  "scenario_intent_roots": [],
+  "pain_value_roots": [],
+  "brand_competitor_roots": [],
+  "b2b_roots": ["bulk","pack","case","wholesale","business","office","commercial","multi pack","bundle"],
+  "negative_irrelevant_roots": [],
+  "high_relevance_roots": [],
+  "asin_regex": "B0[A-Z0-9]{8}",
+  "naming_template": "{asin}-{ad_type}-{structure}-{intent}-{version}"
+}
